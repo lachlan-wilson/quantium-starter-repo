@@ -13,8 +13,34 @@ def process_data():
     with open("processed_data", "w") as file:
         for row in data:
             file.write(f"{row[0]},{row[1]},{row[2]}\n")
+    return data
 
-process_data()
+
+def show_data(data):
+    from dash import Dash, html, dcc
+    import plotly.express as px
+    import pandas as pd
+
+    app = Dash()
+    data_frame = pd.DataFrame({
+        "Date": [row[1] for row in data],
+        "Sales": [row[0] for row in data],
+        "Region": [row[2] for row in data]
+    })
+
+    figure = px.line(data_frame, "Date", "Sales", "Region", "Region")
+
+    app.layout = html.Div(children=[
+        html.H1(children="Pink Morsel Sales"),
+
+        dcc.Graph(figure=figure)
+    ])
+
+    app.run(debug=True)
+
+
+global_data = process_data()
+show_data(global_data)
 
 
 
