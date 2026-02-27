@@ -1,7 +1,7 @@
 def do_it():
     data = []   # Initialise data as an empty array
     for i in range(3):  # Loop 3 times (3 files)
-        with open(f"daily_sales_data_{i}.csv", "r") as file:   # Open the file
+        with open(f"data/daily_sales_data_{i}.csv", "r") as file:   # Open the file
             rows = file.read().splitlines()     # Split the file into an array of rows
             for row in rows:    # Loop for each row
                 split_row = row.split(",")  # Split the row into entries

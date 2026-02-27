@@ -1,5 +1,5 @@
 # Reads the data, organises it and outputs it
-from dash import Dash, html, dcc
+from dash import Dash, html, dcc, callback, Input, Output
 import process_data
 import plotly.express as px
 import pandas as pd
@@ -31,6 +31,19 @@ app.layout = html.Div(children=[
         value="all"
     ),
 ])
+
+@callback(
+    Output("graph", "figure"),
+    Input("radio_filter", "value")
+)
+def update_graph(selected_region):
+    if selected_region == "all":
+        filtered_df = data_frame
+    else:
+        filtered_df = data_frame[data_frame["Region"] == selected_region]
+
+    return px.line(filtered_df, "Date", "Sales", "Region")
+
 
 app.run(debug=True)
 
