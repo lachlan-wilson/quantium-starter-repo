@@ -15,9 +15,10 @@ data_frame = pd.DataFrame({
 figure = px.line(data_frame, "Date", "Sales", "Region")
 
 app.layout = html.Div(children=[
-    html.H1(children="Pink Morsel Sales"),
+    html.H1(children="Pink Morsel Sales", style={"font-family": "Arial", "font-size": "300%"}),
+    html.P(children="This graph shows the amount of Pink Morsels sold by Soul Foods", style={"font-family": "Arial"}),
 
-    dcc.Graph(id="graph", figure=figure),
+    dcc.Graph(id="graph", figure=figure, ),
 
     dcc.RadioItems(
         id="radio_filter",
@@ -28,7 +29,8 @@ app.layout = html.Div(children=[
             "south": "South",
             "west": "West"
         },
-        value="all"
+        value="all",
+        style={"font-family": "Arial"}
     ),
 ])
 
