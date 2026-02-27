@@ -1,5 +1,5 @@
 # Reads the data, organises it and outputs it
-from dash import Dash, html, dcc, Input, Output, callback
+from dash import Dash, html, dcc
 import process_data
 import plotly.express as px
 import pandas as pd
@@ -19,7 +19,17 @@ app.layout = html.Div(children=[
 
     dcc.Graph(id="graph", figure=figure),
 
-
+    dcc.RadioItems(
+        id="radio_filter",
+        options={
+            "all": "All",
+            "north": "North",
+            "east": "East",
+            "south": "South",
+            "west": "West"
+        },
+        value="all"
+    ),
 ])
 
 app.run(debug=True)
